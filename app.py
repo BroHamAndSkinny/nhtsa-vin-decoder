@@ -5,6 +5,14 @@ from python.wmi_database import WMIDatabase
 app = FastAPI(title="VIN Decoder API")
 decoder = NHTSAVinDecoder()
 
+@app.get("/")
+def health_check():
+    return {"status": "ok", "service": "vin-decoder-api"}
+
+@app.get("/health")
+def health():
+    return {"status": "healthy"}
+
 @app.get("/api/decode/{vin}")
 def decode_vin(vin: str):
     vin = vin.strip().upper()
